@@ -338,3 +338,12 @@ textarea {
     .tm-service-img { margin-right: 0; }
     .tm-service-img-r { margin-left: 0; }
 }
+
+.list-group-item-dark{
+    position: relative;
+    display: block;
+    background-color: transparent !important;
+    color: white !important;
+    padding: .75rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.125);
+}
