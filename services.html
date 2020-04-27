@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dwan - Services Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-firestore.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" /> <!-- https://fonts.google.com/ -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" /> <!-- https://getbootstrap.com/ -->
+    <link href="fontawesome/css/all.min.css" rel="stylesheet" /> <!-- https://fontawesome.com/ -->
+    <link href="css/templatemo-diagoona.css" rel="stylesheet" />
+<!--
+
+TemplateMo 550 Diagoona
+
+https://templatemo.com/tm-550-diagoona
+
+-->
+</head>
+
+<body>
+    <div class="tm-container" id=app>        
+        <div>
+            <div class="tm-row pt-4">
+                <div class="tm-col-left">
+                    <div class="tm-site-header media">
+                        <i class="fas fa-umbrella-beach fa-3x mt-1 tm-logo"></i>
+                        <div class="media-body">
+                            <h1 class="tm-sitename text-uppercase">diagoona</h1>
+                            <p class="tm-slogon">new bootstrap template</p>
+                        </div>        
+                    </div>
+                </div>
+                <div class="tm-col-right">
+                    <nav class="navbar navbar-expand-lg" id="tm-main-nav">
+                        <button class="navbar-toggler toggler-example mr-0 ml-auto" type="button" 
+                            data-toggle="collapse" data-target="#navbar-nav" 
+                            aria-controls="navbar-nav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span><i class="fas fa-bars"></i></span>
+                        </button>
+                        <div class="collapse navbar-collapse tm-nav" id="navbar-nav">
+                            <ul class="navbar-nav text-uppercase">
+                                <li class="nav-item">
+                                    <a class="nav-link tm-nav-link" href="index.html">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link tm-nav-link" href="about.html">About</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link tm-nav-link" href="services.html">Services <span class="sr-only">(current)</span></a>
+                                </li>                            
+                                <li class="nav-item">
+                                    <a class="nav-link tm-nav-link" href="contact.html">Contact</a>
+                                </li>
+                            </ul>                            
+                        </div>                        
+                    </nav>
+                </div>
+            </div>
+            
+            <div class="tm-row">
+                <div class="tm-col-left"></div>
+                <main class="tm-col-right">
+                    <div id="content-tabs">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><strong>Shopping List</strong></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#"><strong>Disabled</strong></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#"><strong>Disabled</strong></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#"><strong>Disabled</strong></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="shoppingList">
+                        <div class="tm-row">
+                            <div class="tm-col-left">
+                                <div class="input-group mb-3" style="margin-top:80px;">
+                                    <div class="input-group-prepend">
+                                      <button class="btn btn-outline-secondary" type="button">Button</button>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                  </div>
+                            </div>
+                            <main class="tm-col-right">
+                                <ul class="list-group" style="margin-top:25px;">
+                                    <h1 class="display-4">Shopping List</h1>
+                                    <li v-for="(item, index) in items" class="list-group-item disabled">{{ index }}. {{ item }}</li>
+                                </ul>
+                            </main>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>        
+            <div class="tm-col-left text-center">            
+                <ul class="tm-bg-controls-wrapper">
+                    <li class="tm-bg-control active" data-id="0"></li>
+                    <li class="tm-bg-control" data-id="1"></li>
+                    <li class="tm-bg-control" data-id="2"></li>
+                </ul>            
+            </div>        
+            <div class="tm-col-right tm-col-footer">
+                <footer class="tm-site-footer text-right">
+                    <p class="mb-0">Copyright 2020 Diagoona Co. 
+                    
+                    | Design: <a rel="nofollow" href="https://templatemo.com" class="tm-text-link">TemplateMo</a></p>
+                </footer>
+            </div>  
+        </div>        
+
+        <!-- Diagonal background design -->
+        <div class="tm-bg">
+            <div class="tm-bg-left"></div>
+            <div class="tm-bg-right"></div>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.backstretch.min.js"></script>
+    <script src="js/templatemo-script.js"></script>
+</body>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-analytics.js"></script>
+</html>
+
+<script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        items:["apples","bread"],
+        db: null,
+        firebase: null,
+      },
+      mounted: function () {
+            // Your web app's Firebase configuration
+            
+        var firebaseConfig = {
+            apiKey: "AIzaSyAgRVFrN_PXfx-OYwZaQIljwUyZ84niLv4",
+            authDomain: "shopping-list-20d7d.firebaseapp.com",
+            databaseURL: "https://shopping-list-20d7d.firebaseio.com",
+            projectId: "shopping-list-20d7d",
+            storageBucket: "shopping-list-20d7d.appspot.com",
+            messagingSenderId: "1015011813790",
+            appId: "1:1015011813790:web:6f077b30d7168ec4dece8f",
+            measurementId: "G-EPR6FC0283"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        this.firebase = firebase
+        console.log(this.firebase)
+
+        this.firebase.analytics();
+        this.db = firebase.firestore();
+      }
+    })
+  </script>
