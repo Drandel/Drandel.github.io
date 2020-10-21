@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Dwan - Home</title>
+        <!-- JS -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- CSS -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" />
+       <!--<link href="css/bootstrap.min.css" rel="stylesheet" /> 
+        <link href="fontawesome/css/all.min.css" rel="stylesheet" />
+        <link href="css/templatemo-diagoona.css" rel="stylesheet" /> -->
+
+    </head>
+
+    <body>
+        <h1>Race Track</h1>
+        <hr>
+        <div>
+            <label for="car-count">How many cars are racing?</label>
+            <br>
+            <input type="number" id="car-count" value="5" /> 
+            <br>
+            <button id="race-button">Race!</button>
+            <div>
+                <h3>Results</h3>
+                <hr>
+                <div id="results-area">
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+
+
+
+<script>
+
+    var finishedCars = [];
+    var brokenCars = [];
+    var carList = [];
+
+    $(document).ready(function(){
+        $("#race-button").click(function(){
+            var carCount = $("#car-count").val();
+            
+
+            for (let i = 0; i < carCount; i++) {
+                var newCar = new raceCar(i);
+                carList.push(newCar);
+            }
+            $('#results-area').text("The Race is about to begin!")
+            setTimeout(function(){
+                $('#results-area').text("3");
+                setTimeout(function(){
+                    $('#results-area').text("2");
+                    setTimeout(function(){
+                        $('#results-area').text("1");
+                        setTimeout(function(){
+                            $('#results-area').text("GO!");
+                            setTimeout(function(){
+                                $('#results-area').text("")
+                                startRace()
+                            }, 1000);
+                        }, 1000);
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+            
+            
+        })
+
+        function startRace() {
+            $('#results-area').html("")
+            for (let i = 0; i < Object.keys(carList).length; i++) {
+                carList[i].race();
+                if(carList[i].finishTime > 0) {
+                    finishedCars.push(carList[i]);
+                } else {
+                    brokenCars.push(carList[i]);
+                }
+            }
+
+            //Build string for fancy damage report and print to screen
+            var damagedCarString = '';
+            for (let i = 0; i < Object.keys(brokenCars).length; i++) {
+                let car = brokenCars[i];
+                var damageText = "car.engineBroken";
+
+                if(car.engineBroken == true && car.tireBroken == true){
+                    damageText = " it's engine malfunctioned!"
+                } else if (car.tireBroken == true) {
+                    damageText = " one of it's tires exploded!"
+                } else if(car.engineBroken == true) {
+                    damageText = " it's engine malfunctioned and one of it's tires exploded!"
+                }
+                damagedCarString = damagedCarString + '<strong>Car # ' + car.id + '</strong> crashed because'+ damageText + '<br>'
+            }
+            $('#results-area').html("<h5>Damage Report:</h5><br>" + damagedCarString);
+
+            //Sort by finish time
+            finishedCars.sort((a, b) => (a.finishTime > b.finishTime) ? 1 : -1 )
+            $('#results-area').html($('#results-area').html() + `
+                <br><br>
+                <h3><strong>WINNERS</strong></h3><br>
+                <p>First Place:    Car #` + finishedCars[0].id + `<br>
+                <p>Second Place:   Car #` + finishedCars[1].id + `<br>
+                <p>Third Place:    Car #` + finishedCars[2].id + `
+            `)
+        }
+
+
+        class raceCar {
+            constructor(id) {
+                this.id = id;
+                this.finishTime = 0;
+                this.engineBreakChance = 0.025;
+                this.tireBreakChance = 0.05
+                this.tireBroken = false;
+                this.engineBroken = false;
+                this.damageMessage = "";
+            }
+
+            race() {
+                this.checkForDamage();
+                if(this.tireBroken || this.engineBroken) {
+                    //Car out of race!
+                } else {
+                    this.finishTime = Math.random() * (90 - 45) + 45;
+                }               
+            }
+            checkForDamage() {
+                var damageRoll = Math.random();
+                if(this.tireBreakChance > damageRoll)
+                {
+                    this.tireBroken = true;
+                }
+
+                var damageRoll = Math.random();
+                if(this.engineBreakChance > damageRoll)
+                {
+                    this.engineBroken = true;
+                }
+            }
+
+        }
+    });
+</script>
